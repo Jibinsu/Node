@@ -24,14 +24,14 @@ pipeline {
         stage('Build Node.js App Image') {
             steps {
                 echo 'Building Node.js app image'
-                sh "docker build -t NodeImage ."
+                sh "docker build -t nodeimage:${JOB_NAME} ."
             }
         }
 
         stage('Run Node.js App Container') {
             steps {
                 echo "Running Node.js app container"
-                sh "docker run -d --network NodeNet --name nodeappcont NodeImage"
+                sh "docker run -d --network NodeNet --name nodeappcont nodeimage"
             }
         }
     }
