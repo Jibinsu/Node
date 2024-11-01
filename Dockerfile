@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 # Copy the package.json to the working directory
 COPY package.json ./
 
+RUN apt get nodejs -y
+
 # Install NPM
 RUN npm install
 
