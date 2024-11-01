@@ -21,10 +21,24 @@ pipeline {
             }
         }
 
+        stage('Build NGINX Image') {
+            steps {
+                sh "echo 'Building nginx image'" 
+                sh 'docker build -t mynginx -f Dockerfilenginx .'
+            }
+        }
+
         stage('Build Node.js App Image') {
             steps {
                 echo 'Building Node.js app image'
                 sh "docker build -t nodeimage:${JOB_NAME} ."
+            }
+        }
+
+        stage('Run NGINX Container') {
+            steps {
+                echo "Running NGINX container"
+                sh "docker run -d -p 80:80 --network flasknetwork --name mynginx mynginx"
             }
         }
 
