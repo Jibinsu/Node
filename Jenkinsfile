@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        nodeimage = "MyNodeImage"
+        nodeimage = "node-app"
         nodeappcont = "node_app_container"
-
+        networkname = "nodejsnetwork"
     }
     stages {
         stage('Cleanup') {
@@ -14,23 +14,25 @@ pipeline {
             }
         }
 
+        stage('Create Network') {
+            steps {
+                echo 'Creating Docker network'
+                sh "docker network create NodeNet || true"
+            }
+        }
 
         stage('Build Node.js App Image') {
             steps {
                 echo 'Building Node.js app image'
-                sh 'docker build -t node-app .'
+                sh "docker build -t NodeImage ."
             }
         }
-
 
         stage('Run Node.js App Container') {
             steps {
                 echo "Running Node.js app container"
-                sh "docker run -d --network nodejsnetwork --name nodeappcont node-app"
+                sh "docker run -d --network NodeNet --name nodeappcont NodeImage"
             }
         }
-
-
-                    }
-                }
-      
+    }
+ }
