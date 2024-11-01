@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 
 #install nodejs
-RUN apt get nodejs -y
+RUN apt-get nodejs -y
 
 # Install NPM
 RUN npm install
