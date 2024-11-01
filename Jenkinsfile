@@ -24,7 +24,7 @@ pipeline {
         stage('Run Node.js App Container') {
             steps {
                 echo "Running Node.js app container"
-                sh "docker run -d  --name nodeappcont nodeimage:${JOB_NAME}"
+                sh "docker run -d -p 80:5000  --name nodeappcont nodeimage:${JOB_NAME}"
             }
         }
     }
