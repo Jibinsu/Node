@@ -27,12 +27,5 @@ pipeline {
                 sh "docker run -d  --name nodeappcont nodeimage:${JOB_NAME}"
             }
         }
-
-        stage('Start Node.js App') {
-            steps {
-                echo "Run webapp"
-                sh "node index.js"
-            }
-        }
     }
 }
