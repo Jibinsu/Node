@@ -14,14 +14,6 @@ pipeline {
             }
         }
 
-        stage('Create Network') {
-            steps {
-                echo 'Creating Docker network'
-                sh "docker network create NodeNet || true"
-            }
-        }
-
-
         stage('Build Node.js App Image') {
             steps {
                 echo 'Building Node.js app image'
