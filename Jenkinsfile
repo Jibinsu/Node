@@ -38,7 +38,7 @@ pipeline {
         stage('Run NGINX Container') {
             steps {
                 echo "Running NGINX container"
-                sh "docker run -d -p 80:80 --network flasknetwork --name mynginx mynginx"
+                sh "docker run -d -p 80:80 --network nodenetwork --name mynginx mynginx"
             }
         }
 
